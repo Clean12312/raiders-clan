@@ -7,146 +7,106 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
 body{background:#0a0a0a;color:#fff}
-nav{position:fixed;top:0;width:100%;height:70px;background:rgba(10,10,10,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center;padding:0 20px;z-index:100}
+nav{position:fixed;top:0;width:100%;height:70px;background:rgba(10,10,10,0.95);border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center;padding:0 20px;z-index:100}
 .logo{color:#FFD700;font-weight:900;font-size:24px;letter-spacing:3px}
 .nav-links a{color:#aaa;text-decoration:none;font-weight:700;font-size:14px;cursor:pointer;margin-left:15px}
-.nav-links a.active,.nav-links a:hover{color:#FFD700}
 .nav-links a.admin-link{border:1px solid #FFD700;padding:6px 12px;border-radius:6px;color:#FFD700}
 #admin-login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:200;display:none;align-items:center;justify-content:center}
 .login-box{width:90%;max-width:400px;background:#151515;padding:30px;border:1px solid #222;border-radius:12px;text-align:center}
-.login-box h2{color:#FFD700;margin-bottom:15px}
 .login-box input{width:100%;background:#000;border:1px solid #333;color:#fff;padding:12px;border-radius:8px;margin:10px 0}
 .login-box button{width:100%;background:#FFD700;color:#000;border:none;padding:12px;border-radius:8px;font-weight:900;cursor:pointer;margin-top:10px}
-section{padding-top:100px;max-width:1100px;margin:auto;padding-left:20px;padding-right:20px;padding-bottom:40px;min-height:100vh}
-.hero{text-align:center;padding:60px 0}
-.hero h1{font-size:52px;font-weight:900;letter-spacing:5px}.hero h1 span{color:#FFD700}
-.hero p{color:#777;max-width:600px;margin:10px auto}
+section{padding-top:100px;max-width:1100px;margin:auto;padding:0 20px 40px;min-height:100vh}
+.hero{text-align:center;padding:60px 0}.hero h1{font-size:52px;font-weight:900;letter-spacing:5px}.hero h1 span{color:#FFD700}.hero p{color:#777}
 .btn{padding:14px 28px;border-radius:7px;font-weight:700;border:none;cursor:pointer;margin:5px;display:inline-block;text-decoration:none}
 .btn-gold{background:#FFD700;color:#000}.btn-discord{background:#5865F2;color:#fff}.btn-outline{background:transparent;border:1px solid #FFD700;color:#FFD700}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:40px 0}
-.card{background:#151515;padding:25px;border:1px solid #222;text-align:center;border-radius:12px}
-.card .num{font-size:48px;color:#FFD700;font-weight:900}.card .label{color:#666;margin-top:10px}
+.card{background:#151515;padding:25px;border:1px solid #222;text-align:center;border-radius:12px}.card .num{font-size:48px;color:#FFD700;font-weight:900}.card .label{color:#666;margin-top:10px}
 .raid-card{background:#151515;border-left:4px solid #FFD700;padding:15px;margin:10px 0;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
-.badge{background:rgba(34,197,94,0.15);color:#22c55e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
+.badge{padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}.badge-win{background:rgba(34,197,94,0.15);color:#22c55e}.badge-loss{background:rgba(239,68,68,0.15);color:#ef4444}
 #cbBox{height:400px;background:#000;border:1px solid #222;border-radius:12px;padding:15px;overflow-y:auto;margin-bottom:15px}
 .input-dark{width:100%;background:#000;border:1px solid #333;color:#fff;padding:11px;border-radius:8px}
 #admin-panel{background:#151515;padding:20px;border-radius:12px;margin:20px 0;border:1px solid #FFD700;display:none}
 .editBtn,.editRaidBtn{display:none}.editBtn{background:#FFD700;color:#000;border:none;padding:5px 10px;border-radius:5px;font-size:12px;cursor:pointer;margin-top:10px}.editRaidBtn{background:#222;color:#fff;border:1px solid #444;padding:4px 8px;border-radius:5px;font-size:11px;cursor:pointer;margin-left:10px}
 .discord-box{background:linear-gradient(135deg,#151515,#1e1e2f);border:1px solid #5865F2;padding:25px;border-radius:12px;margin:30px 0;display:flex;justify-content:space-between;align-items:center}
-.hamburger{display:none}
 @media(max-width:768px){.grid{grid-template-columns:1fr}.discord-box{flex-direction:column;gap:15px}}
 </style>
 </head>
 <body>
-<nav>
-<div class="logo">RAIDERS</div>
-<div class="nav-links" id="navLinks">
-<a class="active">HOME</a>
-<a onclick="document.getElementById('discord').scrollIntoView({behavior:'smooth'})">DISCORD</a>
-<a id="adminStatus" class="admin-link" onclick="showLogin()">🔒 ADMIN</a>
-</div>
-</nav>
-
-<div id="admin-login-overlay">
-<div class="login-box">
-<h2>ADMIN BEREICH</h2>
-<p style="color:#666;font-size:13px">Nur für Leitung - Passwort benötigt</p>
-<input type="password" id="pwInput" placeholder="Passwort eingeben">
-<button onclick="checkPW()">Freischalten</button>
-<button onclick="closeLogin()" style="background:transparent;color:#666;border:1px solid #333;margin-top:8px">Abbrechen</button>
-<p id="loginError" style="color:#ff4444;margin-top:10px;display:none">Falsches Passwort</p>
-</div>
-</div>
-
+<nav><div class="logo">RAIDERS</div><div class="nav-links"><a class="active">HOME</a><a id="adminStatus" class="admin-link" onclick="showLogin()">🔒 ADMIN</a></div></nav>
+<div id="admin-login-overlay"><div class="login-box"><h2 style="color:#FFD700">ADMIN</h2><input type="password" id="pwInput" placeholder="Passwort"><button onclick="checkPW()">Freischalten</button><button onclick="closeLogin()" style="background:transparent;color:#666;border:1px solid #333;margin-top:8px">Abbrechen</button><p id="loginError" style="color:#ff4444;margin-top:10px;display:none">Falsches Passwort</p></div></div>
 <section>
-<div class="hero">
-<h1>WE ARE <span>RAIDERS</span></h1>
-<p>Elite Clan - Jeder kann rein, nur Admin braucht Passwort</p>
-<br>
-<a class="btn btn-gold" href="https://discord.gg/sJDvdYxzD" target="_blank">Discord beitreten</a>
-<a class="btn btn-outline" href="#stats">Stats ansehen</a>
-</div>
-
-<div id="admin-panel">
-<h3 style="color:#FFD700">✅ Admin Modus Aktiv</h3>
-<p style="color:#666;font-size:13px">Du kannst alles bearbeiten</p>
-<button onclick="editDiscord()" style="margin-top:10px;background:#5865F2;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-right:5px">Discord Link ändern</button>
-<button onclick="addRaid()" style="margin-top:10px;background:#FFD700;color:#000;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-right:5px">+ Neuer Raid</button>
-<button onclick="logout()" style="margin-top:10px;background:#222;color:#fff;border:1px solid #444;padding:6px 12px;border-radius:6px;cursor:pointer">Logout</button>
-</div>
-
-<div class="grid" id="stats">
-<div class="card"><div class="num" id="s1">47</div><div class="label">Mitglieder</div><button onclick="editStat('s1')" class="editBtn">✏️ Bearbeiten</button></div>
-<div class="card"><div class="num" id="s2">128</div><div class="label">War Wins</div><button onclick="editStat('s2')" class="editBtn">✏️ Bearbeiten</button></div>
-<div class="card"><div class="num" id="s3">Lvl 18</div><div class="label">Clan Level</div><button onclick="editStat('s3')" class="editBtn">✏️ Bearbeiten</button></div>
-</div>
-
-<div id="discord" class="discord-box">
-<div><h3>💬 Join unseren Discord</h3><p style="color:#888;font-size:14px;margin-top:5px" id="discordText">Code: sJDvdYxzD - Für Taktik & Anmeldung</p></div>
-<a id="discordLink" href="https://discord.gg/sJDvdYxzD" target="_blank" class="btn btn-discord">Zum Discord</a>
-</div>
-
-<h2 style="margin-top:40px">Letzte Raids</h2>
-<div id="raidList">
-<div class="raid-card"><div class="left"><span class="raid-text">vs. Dark Legends - 45:12</span></div><div><span class="badge">WIN</span><button class="editRaidBtn" onclick="editRaid(this)">✏️</button><button class="editRaidBtn" onclick="deleteRaid(this)" style="color:#ff4444">🗑️</button></div></div>
-<div class="raid-card"><div class="left"><span class="raid-text">vs. Iron Titans - 38:21</span></div><div><span class="badge">WIN</span><button class="editRaidBtn" onclick="editRaid(this)">✏️</button><button class="editRaidBtn" onclick="deleteRaid(this)" style="color:#ff4444">🗑️</button></div></div>
-<div class="raid-card"><div class="left"><span class="raid-text">vs. Shadow Wolves - 32:28</span></div><div><span class="badge" style="background:rgba(239,68,68,0.15);color:#ef4444">LOSS</span><button class="editRaidBtn" onclick="editRaid(this)">✏️</button><button class="editRaidBtn" onclick="deleteRaid(this)" style="color:#ff4444">🗑️</button></div></div>
-</div>
-
-<h2 style="margin-top:40px">Clan Chat (für alle offen)</h2>
-<div id="cbBox"><div style="color:#666">Willkommen im Raiders Chat! Jeder kann schreiben.</div></div>
-<div style="display:flex;gap:10px"><input class="input-dark" id="chatInput" placeholder="Nachricht..."><button onclick="sendChat()" class="btn btn-gold" style="padding:10px 20px">Senden</button></div>
+<div class="hero"><h1>WE ARE <span>RAIDERS</span></h1><p>Jeder kann rein - nur Admin braucht Passwort</p><br><a id="topDiscordBtn" class="btn btn-gold" href="https://discord.gg/sJDvdYxzD" target="_blank">Discord beitreten</a><a class="btn btn-outline" href="#stats">Stats</a></div>
+<div id="admin-panel"><h3 style="color:#FFD700">✅ Admin Aktiv - Speicherung AN</h3><button onclick="editDiscord()" style="margin-top:10px;background:#5865F2;color:#fff;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-right:5px">Discord ändern</button><button onclick="addRaid()" style="background:#FFD700;color:#000;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-right:5px">+ Neuer Raid</button><button onclick="logout()" style="background:#222;color:#fff;border:1px solid #444;padding:6px 12px;border-radius:6px;cursor:pointer">Logout</button></div>
+<div class="grid" id="stats"><div class="card"><div class="num" id="s1">47</div><div class="label">Mitglieder</div><button onclick="editStat('s1')" class="editBtn">✏️ Bearbeiten</button></div><div class="card"><div class="num" id="s2">128</div><div class="label">War Wins</div><button onclick="editStat('s2')" class="editBtn">✏️ Bearbeiten</button></div><div class="card"><div class="num" id="s3">Lvl 18</div><div class="label">Clan Level</div><button onclick="editStat('s3')" class="editBtn">✏️ Bearbeiten</button></div></div>
+<div id="discord" class="discord-box"><div><h3>💬 Join Discord</h3><p style="color:#888;font-size:14px" id="discordText">Code: sJDvdYxzD</p></div><a id="discordLink" href="https://discord.gg/sJDvdYxzD" target="_blank" class="btn btn-discord">Zum Discord</a></div>
+<h2>Letzte Raids</h2><div id="raidList"></div>
+<h2 style="margin-top:40px">Clan Chat</h2><div id="cbBox"></div><div style="display:flex;gap:10px"><input class="input-dark" id="chatInput" placeholder="Nachricht..."><button onclick="sendChat()" class="btn btn-gold">Senden</button></div>
 </section>
-
 <script>
-// Passwort Laenko verschlüsselt - steht nirgends im Klartext
-const _k = [83,104,108,117,114,118];
-function decode(arr){ return arr.map(c=>String.fromCharCode(c-7)).join(''); }
-let isAdmin = false;
+const _k=[83,104,108,117,114,118];function decode(a){return a.map(c=>String.fromCharCode(c-7)).join('');}
+let isAdmin=false;
+const defaultRaids=[{text:"vs. Dark Legends - 45:12",result:"WIN"},{text:"vs. Iron Titans - 38:21",result:"WIN"},{text:"vs. Shadow Wolves - 32:28",result:"LOSS"}];
 
-function showLogin(){ if(isAdmin) return; document.getElementById('admin-login-overlay').style.display='flex'; document.getElementById('pwInput').focus(); }
-function closeLogin(){ document.getElementById('admin-login-overlay').style.display='none'; document.getElementById('loginError').style.display='none'; document.getElementById('pwInput').value=''; }
-function checkPW(){
-  const inp = document.getElementById('pwInput').value;
-  if(inp === decode(_k)){
-    isAdmin = true; closeLogin();
-    document.getElementById('admin-panel').style.display='block';
-    document.getElementById('adminStatus').innerText='✅ ADMIN AKTIV';
-    document.getElementById('adminStatus').style.color='#22c55e';
-    document.getElementById('adminStatus').style.borderColor='#22c55e';
-    document.querySelectorAll('.editBtn,.editRaidBtn').forEach(b=>b.style.display='inline-block');
-    localStorage.setItem('raiders_admin','1');
-  }else{ document.getElementById('loginError').style.display='block'; }
+function saveAll(){
+  localStorage.setItem('raiders_s1',document.getElementById('s1').innerText);
+  localStorage.setItem('raiders_s2',document.getElementById('s2').innerText);
+  localStorage.setItem('raiders_s3',document.getElementById('s3').innerText);
+  localStorage.setItem('raiders_discord',document.getElementById('discordLink').href);
+  localStorage.setItem('raiders_discordText',document.getElementById('discordText').innerText);
+  const raids=[]; document.querySelectorAll('#raidList .raid-card').forEach(c=>{
+    raids.push({text:c.querySelector('.raid-text').innerText, result:c.querySelector('.badge').innerText});
+  });
+  localStorage.setItem('raiders_raids',JSON.stringify(raids));
+  localStorage.setItem('raiders_chat',document.getElementById('cbBox').innerHTML);
 }
-function logout(){
-  isAdmin=false; localStorage.removeItem('raiders_admin');
-  document.getElementById('admin-panel').style.display='none';
-  document.getElementById('adminStatus').innerText='🔒 ADMIN';
-  document.getElementById('adminStatus').style.color='#FFD700';
-  document.getElementById('adminStatus').style.borderColor='#FFD700';
-  document.querySelectorAll('.editBtn,.editRaidBtn').forEach(b=>b.style.display='none');
-}
-function editStat(id){ if(!isAdmin) return showLogin(); const v=prompt('Neuer Wert:'); if(v) document.getElementById(id).innerText=v; }
-function editRaid(btn){ if(!isAdmin) return showLogin(); const span=btn.closest('.raid-card').querySelector('.raid-text'); const v=prompt('Raid bearbeiten:',span.innerText); if(v) span.innerText=v; }
-function deleteRaid(btn){ if(!isAdmin) return showLogin(); if(confirm('Diesen Raid löschen?')) btn.closest('.raid-card').remove(); }
-function addRaid(){ if(!isAdmin) return showLogin(); const text=prompt('Neuer Raid z.B. vs. ClanName - 50:10'); if(!text) return; const res=prompt('WIN oder LOSS?','WIN'); const list=document.getElementById('raidList'); const div=document.createElement('div'); div.className='raid-card'; div.innerHTML=`<div class="left"><span class="raid-text">${text}</span></div><div><span class="badge" style="${res==='LOSS'?'background:rgba(239,68,68,0.15);color:#ef4444':''}">${res}</span><button class="editRaidBtn" style="display:inline-block" onclick="editRaid(this)">✏️</button><button class="editRaidBtn" style="display:inline-block;color:#ff4444" onclick="deleteRaid(this)">🗑️</button></div>`; list.prepend(div); }
-function editDiscord(){ if(!isAdmin) return showLogin(); const newLink=prompt('Neuer Discord Link:',document.getElementById('discordLink').href); if(newLink) document.getElementById('discordLink').href=newLink; }
-function sendChat(){
-  const i=document.getElementById('chatInput'); if(!i.value) return;
-  const box=document.getElementById('cbBox');
-  box.innerHTML+=`<div style="margin-top:8px"><b style="color:#FFD700">${isAdmin?'[ADMIN]':'USER'}:</b> ${i.value}</div>`;
-  i.value=''; box.scrollTop=box.scrollHeight;
-}
-window.onload=()=>{
-  if(localStorage.getItem('raiders_admin')==='1'){
-    isAdmin=true;
-    document.getElementById('admin-panel').style.display='block';
-    document.getElementById('adminStatus').innerText='✅ ADMIN AKTIV';
-    document.getElementById('adminStatus').style.color='#22c55e';
-    document.querySelectorAll('.editBtn,.editRaidBtn').forEach(b=>b.style.display='inline-block');
+function loadAll(){
+  if(localStorage.getItem('raiders_s1')) document.getElementById('s1').innerText=localStorage.getItem('raiders_s1');
+  if(localStorage.getItem('raiders_s2')) document.getElementById('s2').innerText=localStorage.getItem('raiders_s2');
+  if(localStorage.getItem('raiders_s3')) document.getElementById('s3').innerText=localStorage.getItem('raiders_s3');
+  if(localStorage.getItem('raiders_discord')){
+    const link=localStorage.getItem('raiders_discord');
+    document.getElementById('discordLink').href=link;
+    document.getElementById('topDiscordBtn').href=link;
   }
+  if(localStorage.getItem('raiders_discordText')) document.getElementById('discordText').innerText=localStorage.getItem('raiders_discordText');
+  
+  let raidsToShow=defaultRaids;
+  if(localStorage.getItem('raiders_raids')){
+    try{raidsToShow=JSON.parse(localStorage.getItem('raiders_raids'));}catch(e){raidsToShow=defaultRaids;}
+  }
+  renderRaids(raidsToShow);
+  
+  if(localStorage.getItem('raiders_chat')) document.getElementById('cbBox').innerHTML=localStorage.getItem('raiders_chat');
+  else document.getElementById('cbBox').innerHTML='<div style="color:#666">Willkommen im Raiders Chat!</div>';
 }
-document.getElementById('pwInput').addEventListener('keypress',e=>{ if(e.key==='Enter') checkPW(); });
+function renderRaids(arr){
+  const list=document.getElementById('raidList'); list.innerHTML='';
+  arr.forEach(r=>{
+    const div=document.createElement('div'); div.className='raid-card';
+    const cls=r.result==='LOSS'?'badge-loss':'badge-win';
+    div.innerHTML=`<div><span class="raid-text">${r.text}</span></div><div><span class="badge ${cls}">${r.result}</span><button class="editRaidBtn" onclick="editRaid(this)">✏️</button><button class="editRaidBtn" onclick="deleteRaid(this)" style="color:#ff4444">🗑️</button></div>`;
+    list.appendChild(div);
+  });
+  if(isAdmin) document.querySelectorAll('.editRaidBtn').forEach(b=>b.style.display='inline-block');
+}
+
+function showLogin(){if(isAdmin)return;document.getElementById('admin-login-overlay').style.display='flex';}
+function closeLogin(){document.getElementById('admin-login-overlay').style.display='none';}
+function checkPW(){if(document.getElementById('pwInput').value===decode(_k)){isAdmin=true;closeLogin();document.getElementById('admin-panel').style.display='block';document.getElementById('adminStatus').innerText='✅ ADMIN';document.querySelectorAll('.editBtn,.editRaidBtn').forEach(b=>b.style.display='inline-block');localStorage.setItem('raiders_admin','1');}else{document.getElementById('loginError').style.display='block';}}
+function logout(){isAdmin=false;localStorage.removeItem('raiders_admin');document.getElementById('admin-panel').style.display='none';document.getElementById('adminStatus').innerText='🔒 ADMIN';document.querySelectorAll('.editBtn,.editRaidBtn').forEach(b=>b.style.display='none');}
+function editStat(id){if(!isAdmin)return showLogin();const v=prompt('Neuer Wert:',document.getElementById(id).innerText);if(v){document.getElementById(id).innerText=v;saveAll();}}
+function editRaid(b){if(!isAdmin)return showLogin();const s=b.closest('.raid-card').querySelector('.raid-text');const v=prompt('Bearbeiten:',s.innerText);if(v){s.innerText=v;saveAll();}}
+function deleteRaid(b){if(!isAdmin)return showLogin();if(confirm('Löschen?')){b.closest('.raid-card').remove();saveAll();}}
+function addRaid(){if(!isAdmin)return showLogin();const t=prompt('Neuer Raid:');if(!t)return;const r=prompt('WIN oder LOSS?','WIN');const list=document.getElementById('raidList');const div=document.createElement('div');div.className='raid-card';const cls=r==='LOSS'?'badge-loss':'badge-win';div.innerHTML=`<div><span class="raid-text">${t}</span></div><div><span class="badge ${cls}">${r}</span><button class="editRaidBtn" style="display:inline-block" onclick="editRaid(this)">✏️</button><button class="editRaidBtn" style="display:inline-block;color:#ff4444" onclick="deleteRaid(this)">🗑️</button></div>`;list.prepend(div);saveAll();}
+function editDiscord(){if(!isAdmin)return showLogin();const n=prompt('Neuer Discord Link:',document.getElementById('discordLink').href);if(n){document.getElementById('discordLink').href=n;document.getElementById('topDiscordBtn').href=n;saveAll();}}
+function sendChat(){const i=document.getElementById('chatInput');if(!i.value)return;document.getElementById('cbBox').innerHTML+=`<div style="margin-top:8px"><b style="color:#FFD700">${isAdmin?'[ADMIN]':'USER'}:</b> ${i.value}</div>`;i.value='';document.getElementById('cbBox').scrollTop=document.getElementById('cbBox').scrollHeight;saveAll();}
+
+window.onload=()=>{
+  loadAll();
+  if(localStorage.getItem('raiders_admin')==='1'){isAdmin=true;document.getElementById('admin-panel').style.display='block';document.getElementById('adminStatus').innerText='✅ ADMIN';document.querySelectorAll('.editBtn,.editRaidBtn').forEach(b=>b.style.display='inline-block');}
+}
+document.getElementById('pwInput').addEventListener('keypress',e=>{if(e.key==='Enter')checkPW();});
+document.getElementById('chatInput').addEventListener('keypress',e=>{if(e.key==='Enter')sendChat();});
 </script>
 </body>
 </html>
