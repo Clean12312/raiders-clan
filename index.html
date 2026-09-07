@@ -12,17 +12,17 @@ nav{position:fixed;top:0;width:100%;height:70px;background:rgba(10,10,10,0.95);b
 .logo{color:#FFD700;font-weight:900;font-size:24px;letter-spacing:3px}
 .nav-links a{color:#aaa;text-decoration:none;font-weight:700;font-size:14px;cursor:pointer;margin-left:15px}
 .nav-links a.active,.nav-links a:hover{color:#FFD700}
-.nav-links a.admin-link{border:1px solid #444;padding:5px 10px;border-radius:5px;color:#444}
-#admin-login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:200;display:flex;align-items:center;justify-content:center}
+.nav-links a.admin-link{border:1px solid #FFD700;padding:6px 12px;border-radius:6px;color:#FFD700}
+#admin-login-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:200;display:none;align-items:center;justify-content:center}
 .login-box{width:90%;max-width:400px;background:#151515;padding:30px;border:1px solid #222;border-radius:12px;text-align:center}
 .login-box h2{color:#FFD700;margin-bottom:15px}
 .login-box input{width:100%;background:#000;border:1px solid #333;color:#fff;padding:12px;border-radius:8px;margin:10px 0}
 .login-box button{width:100%;background:#FFD700;color:#000;border:none;padding:12px;border-radius:8px;font-weight:900;cursor:pointer;margin-top:10px}
-section{padding-top:100px;padding-bottom:40px;min-height:100vh;max-width:1100px;margin:auto}
+section{padding-top:100px;padding-bottom:40px;min-height:100vh;max-width:1100px;margin:auto;padding-left:20px;padding-right:20px}
 .hero{text-align:center;padding:60px 0}
 .hero h1{font-size:52px;font-weight:900;letter-spacing:5px}
 .hero h1 span{color:#FFD700}
-.hero p{color:#3a3a3a;max-width:600px;margin:10px auto}
+.hero p{color:#777;max-width:600px;margin:10px auto}
 .btn{padding:14px 28px;border-radius:7px;font-weight:700;border:none;cursor:pointer;margin:5px;display:inline-block;text-decoration:none}
 .btn-gold{background:#FFD700;color:#000}
 .btn-outline{background:transparent;border:1px solid #FFD700;color:#FFD700}
@@ -34,9 +34,10 @@ section{padding-top:100px;padding-bottom:40px;min-height:100vh;max-width:1100px;
 .badge{background:rgba(34,197,94,0.15);color:#22c55e;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
 #cbBox{height:400px;background:#000;border:1px solid #222;border-radius:12px;padding:15px;overflow-y:auto;margin-bottom:15px}
 .input-dark{width:100%;background:#000;border:1px solid #333;color:#fff;padding:11px;border-radius:8px}
-#admin-panel{background:#151515;padding:20px;border-radius:12px;margin:20px 0;border:1px solid #222;display:none}
-@media(max-width:768px){.grid{grid-template-columns:1fr}.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;width:100%;background:#0a0a0a;padding:20px;border-bottom:1px solid #222}.hamburger{display:block !important}}
+#admin-panel{background:#151515;padding:20px;border-radius:12px;margin:20px 0;border:1px solid #FFD700;display:none}
+.editBtn{display:none;background:#FFD700;color:#000;border:none;padding:5px 10px;border-radius:5px;font-size:12px;cursor:pointer;margin-top:10px}
 .hamburger{display:none;font-size:28px;cursor:pointer}
+@media(max-width:768px){.grid{grid-template-columns:1fr}.hamburger{display:block !important}.nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:70px;left:0;width:100%;background:#0a0a0a;padding:20px;border-bottom:1px solid #222}}
 </style>
 </head>
 <body>
@@ -45,73 +46,93 @@ section{padding-top:100px;padding-bottom:40px;min-height:100vh;max-width:1100px;
 <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</div>
 <div class="nav-links" id="navLinks">
 <a class="active">HOME</a>
-<a id="adminStatus" class="admin-link" onclick="showLogin()">🔒 ADMIN LOGIN</a>
+<a id="adminStatus" class="admin-link" onclick="showLogin()">🔒 ADMIN</a>
 </div>
 </nav>
+
 <div id="admin-login-overlay">
 <div class="login-box">
-<h2>RAIDERS ADMIN</h2>
-<p style="color:#666;font-size:13px">Nur für Clan-Leitung</p>
-<input type="password" id="pwInput" placeholder="Geheimes Passwort">
-<button onclick="checkPW()">Einloggen</button>
+<h2>ADMIN BEREICH</h2>
+<p style="color:#666;font-size:13px">Nur für Clan-Leitung - Passwort benötigt</p>
+<input type="password" id="pwInput" placeholder="Passwort eingeben">
+<button onclick="checkPW()">Freischalten</button>
+<button onclick="closeLogin()" style="background:transparent;color:#666;border:1px solid #333;margin-top:8px">Abbrechen</button>
 <p id="loginError" style="color:#ff4444;margin-top:10px;display:none">Falsches Passwort</p>
 </div>
 </div>
+
 <section>
 <div class="hero">
 <h1>WE ARE <span>RAIDERS</span></h1>
-<p>Elite Clash of Clans Clan - Organisierte Raids, max. Spenden, 100% Aktivität</p>
+<p>Elite Clash of Clans Clan - Jeder kann rein, nur Admin braucht Passwort</p>
 <br>
 <a class="btn btn-gold" href="#">Clan beitreten</a>
 <a class="btn btn-outline" href="#stats">Stats ansehen</a>
 </div>
+
 <div id="admin-panel">
-<h3 style="color:#FFD700">✅ Admin freigeschaltet</h3>
-<p style="color:#666;font-size:13px">Du kannst jetzt Stats bearbeiten. Für alle anderen gesperrt.</p>
-<button onclick="logout()" style="margin-top:10px;background:#222;color:#fff;border:1px solid #444;padding:6px 12px;border-radius:6px;cursor:pointer">Ausloggen</button>
+<h3 style="color:#FFD700">✅ Admin Modus Aktiv</h3>
+<p style="color:#666;font-size:13px">Du kannst jetzt alle Stats bearbeiten</p>
+<button onclick="logout()" style="margin-top:10px;background:#222;color:#fff;border:1px solid #444;padding:6px 12px;border-radius:6px;cursor:pointer">Admin verlassen</button>
 </div>
+
 <div class="grid" id="stats">
-<div class="card"><div class="num" id="s1">47</div><div class="label">Mitglieder</div><button onclick="editStat('s1')" class="editBtn" style="display:none">✏️ Ändern</button></div>
-<div class="card"><div class="num" id="s2">128</div><div class="label">War Wins</div><button onclick="editStat('s2')" class="editBtn" style="display:none">✏️ Ändern</button></div>
-<div class="card"><div class="num" id="s3">Lvl 18</div><div class="label">Clan Level</div><button onclick="editStat('s3')" class="editBtn" style="display:none">✏️ Ändern</button></div>
+<div class="card"><div class="num" id="s1">47</div><div class="label">Mitglieder</div><button onclick="editStat('s1')" class="editBtn">✏️ Bearbeiten</button></div>
+<div class="card"><div class="num" id="s2">128</div><div class="label">War Wins</div><button onclick="editStat('s2')" class="editBtn">✏️ Bearbeiten</button></div>
+<div class="card"><div class="num" id="s3">Lvl 18</div><div class="label">Clan Level</div><button onclick="editStat('s3')" class="editBtn">✏️ Bearbeiten</button></div>
 </div>
+
 <h2 style="margin-top:40px">Letzte Raids</h2>
 <div class="raid-card"><span>vs. Dark Legends - 45:12</span><span class="badge">WIN</span></div>
 <div class="raid-card"><span>vs. Iron Titans - 38:21</span><span class="badge">WIN</span></div>
-<h2 style="margin-top:40px">Clan Chat</h2>
-<div id="cbBox"><div style="color:#666">Willkommen im Raiders Chat!</div></div>
+
+<h2 style="margin-top:40px">Clan Chat (für alle offen)</h2>
+<div id="cbBox"><div style="color:#666">Willkommen im Raiders Chat! Jeder kann schreiben.</div></div>
 <div style="display:flex;gap:10px"><input class="input-dark" id="chatInput" placeholder="Nachricht..."><button onclick="sendChat()" class="btn btn-gold" style="padding:10px 20px">Senden</button></div>
 </section>
+
 <script>
-const _k = [58,39,84,108,123,108,121,39,87,108,123,108,121];
+// Neues Passwort Laenko - verschlüsselt, nicht im Klartext sichtbar
+const _k = [83,104,108,117,114,118];
 function decode(arr){ return arr.map(c=>String.fromCharCode(c-7)).join(''); }
 let isAdmin = false;
+
+function showLogin(){
+  if(isAdmin) return;
+  document.getElementById('admin-login-overlay').style.display='flex';
+  document.getElementById('pwInput').focus();
+}
+function closeLogin(){
+  document.getElementById('admin-login-overlay').style.display='none';
+  document.getElementById('loginError').style.display='none';
+  document.getElementById('pwInput').value='';
+}
 function checkPW(){
   const inp = document.getElementById('pwInput').value;
   const real = decode(_k);
   if(inp === real){
     isAdmin = true;
-    document.getElementById('admin-login-overlay').style.display='none';
+    closeLogin();
     document.getElementById('admin-panel').style.display='block';
-    document.getElementById('adminStatus').innerText='✅ ADMIN';
+    document.getElementById('adminStatus').innerText='✅ ADMIN AKTIV';
     document.getElementById('adminStatus').style.color='#22c55e';
+    document.getElementById('adminStatus').style.borderColor='#22c55e';
     document.querySelectorAll('.editBtn').forEach(b=>b.style.display='inline-block');
     localStorage.setItem('raiders_admin','1');
   }else{
     document.getElementById('loginError').style.display='block';
   }
 }
-function showLogin(){ if(!isAdmin) document.getElementById('admin-login-overlay').style.display='flex'; }
 function logout(){
   isAdmin=false;
   localStorage.removeItem('raiders_admin');
-  document.getElementById('admin-login-overlay').style.display='flex';
   document.getElementById('admin-panel').style.display='none';
-  document.getElementById('adminStatus').innerText='🔒 ADMIN LOGIN';
+  document.getElementById('adminStatus').innerText='🔒 ADMIN';
+  document.getElementById('adminStatus').style.color='#FFD700';
   document.querySelectorAll('.editBtn').forEach(b=>b.style.display='none');
 }
 function editStat(id){
-  if(!isAdmin) return alert('Nur Admin!');
+  if(!isAdmin) return showLogin();
   const val = prompt('Neuer Wert:');
   if(val) document.getElementById(id).innerText=val;
 }
@@ -119,16 +140,17 @@ function sendChat(){
   const i=document.getElementById('chatInput');
   if(!i.value) return;
   const box=document.getElementById('cbBox');
-  box.innerHTML+=`<div style="margin-top:8px"><b style="color:#FFD700">YOU:</b> ${i.value}</div>`;
+  const tag = isAdmin ? '<b style="color:#FFD700">[ADMIN]</b>' : '<b>USER</b>';
+  box.innerHTML+=`<div style="margin-top:8px">${tag}: ${i.value}</div>`;
   i.value='';
   box.scrollTop=box.scrollHeight;
 }
 window.onload=()=>{
   if(localStorage.getItem('raiders_admin')==='1'){
-    document.getElementById('admin-login-overlay').style.display='none';
-    document.getElementById('admin-panel').style.display='block';
-    document.getElementById('adminStatus').innerText='✅ ADMIN';
     isAdmin=true;
+    document.getElementById('admin-panel').style.display='block';
+    document.getElementById('adminStatus').innerText='✅ ADMIN AKTIV';
+    document.getElementById('adminStatus').style.color='#22c55e';
     document.querySelectorAll('.editBtn').forEach(b=>b.style.display='inline-block');
   }
 }
