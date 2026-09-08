@@ -6,16 +6,24 @@
 <title>Raiders Clan DE</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-  body{background:#0a0a0a;color:#fff}
-  .header{text-align:center;padding:50px 20px 30px;border-bottom:1px solid #1a1a1a}
+  body{background:#0a0a0a;color:#fff;overflow-x:hidden}
+  .header{text-align:center;padding:50px 20px 20px}
   .header h1{font-size:48px;font-weight:900;letter-spacing:3px}
   .sub{color:#666;margin-top:10px}
-  .container{max-width:1100px;margin:0 auto;padding:30px 20px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-  .card{background:#111;border:1px solid #222;border-radius:16px;overflow:hidden}
-  .card img{width:100%;height:240px;object-fit:cover;background:#000;display:block}
-  .card-info{padding:16px}
-  .title{font-size:22px;font-weight:800;margin:50px 0 20px;display:flex;gap:10px;align-items:center}
+  .discord{display:flex;justify-content:center;margin:25px 0 10px}
+  .discord a{background:#5865F2;color:#fff;padding:14px 30px;border-radius:12px;text-decoration:none;font-weight:800}
+  
+  /* LAUFBAND - UNENDLICHE SCHLEIFE */
+  .marquee{width:100%;overflow:hidden;background:#111;border-top:1px solid #222;border-bottom:1px solid #222;padding:20px 0;margin:30px 0}
+  .track{display:flex;gap:20px;width:max-content;animation:laufband 25s linear infinite}
+  .marquee:hover .track{animation-play-state:paused}
+  @keyframes laufband{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .card{min-width:300px;background:#0a0a0a;border:1px solid #222;border-radius:16px;overflow:hidden}
+  .card img{width:300px;height:240px;object-fit:cover;background:#000;display:block}
+  .card-info{padding:12px 16px;font-weight:700}
+
+  .container{max-width:1100px;margin:0 auto;padding:20px}
+  .title{font-size:22px;font-weight:800;margin:40px 0 20px;display:flex;gap:10px;align-items:center}
   .title::before{content:'';width:4px;height:22px;background:#ff1a1a;border-radius:2px}
   .logs{background:#111;border:1px solid #222;border-radius:16px}
   .log{padding:18px 20px;border-bottom:1px solid #1a1a1a;display:flex;justify-content:space-between}
@@ -23,51 +31,72 @@
   .pw{display:flex;gap:10px;justify-content:center;max-width:400px;margin:20px auto 0}
   .pw input{flex:1;background:#0a0a0a;border:1px solid #333;border-radius:10px;padding:12px 16px;color:#fff}
   .pw button{background:#fff;color:#000;border:none;border-radius:10px;padding:12px 24px;font-weight:800;cursor:pointer}
-  .discord{display:flex;justify-content:center;margin:25px 0}
-  .discord a{background:#5865F2;color:#fff;padding:14px 30px;border-radius:12px;text-decoration:none;font-weight:700}
+  .admin-form{display:none;margin-top:25px;text-align:left;background:#0a0a0a;border-radius:12px;padding:20px}
+  .admin-form input,.admin-form textarea{width:100%;background:#111;border:1px solid #333;border-radius:8px;padding:12px;color:#fff;margin-bottom:10px}
+  .admin-form button{width:100%;background:#ff1a1a;color:#fff;border:none;border-radius:10px;padding:12px;font-weight:800;cursor:pointer}
 </style>
 </head>
 <body>
+
 <div class="header">
   <h1>RAIDERS CLAN DE</h1>
   <div class="sub">gerated am 07.09.</div>
   <div class="discord"><a href="https://discord.gg/sJDvdYxzD" target="_blank">Discord beitreten</a></div>
 </div>
 
-<div class="container">
-  <div class="grid">
-    <div class="card"><img src="eh.jpg"><div class="card-info"><h3>EH</h3></div></div>
-    <div class="card"><img src="mc.jpg" style="object-fit:contain;background:#000"><div class="card-info"><h3>MC</h3></div></div>
-    <div class="card"><img src="raiders_main.jpg"><div class="card-info"><h3>RAIDERS MAIN</h3></div></div>
-    <div class="card"><img src="sab.jpg"><div class="card-info"><h3>SAB</h3></div></div>
-    <div class="card"><img src="roblox.jpg"><div class="card-info"><h3>ROBLOX</h3></div></div>
-    <div class="card"><img src="dc.jpg"><div class="card-info"><h3>DC</h3></div></div>
+<!-- BILDER LAUFBAND UNENDLICH -->
+<div class="marquee">
+  <div class="track" id="track">
+    <div class="card"><img src="eh.jpg"><div class="card-info">EH</div></div>
+    <div class="card"><img src="mc.jpg" style="object-fit:contain;background:#000"><div class="card-info">MC</div></div>
+    <div class="card"><img src="raiders_main.jpg"><div class="card-info">RAIDERS MAIN</div></div>
+    <div class="card"><img src="sab.jpg"><div class="card-info">SAB</div></div>
+    <div class="card"><img src="roblox.jpg"><div class="card-info">ROBLOX</div></div>
+    <div class="card"><img src="dc.jpg"><div class="card-info">DC</div></div>
   </div>
+</div>
 
+<div class="container">
   <div class="title">RAID LOGS</div>
-  <div class="logs">
+  <div class="logs" id="logsList">
     <div class="log"><span>EH Raid erfolgreich</span><span style="color:#555">07.09. 19:42</span></div>
     <div class="log"><span>MC Gebiet eingenommen</span><span style="color:#555">07.09. 18:30</span></div>
-    <div class="log"><span>RAIDERS MAIN - Full Clear</span><span style="color:#555">07.09. 16:15</span></div>
   </div>
 
   <div class="admin">
     <h2>ADMIN BEREICH</h2>
-    <p style="color:#666">Passwort erforderlich</p>
-    <div class="pw">
-      <input type="password" id="pw" placeholder="Passwort...">
-      <button onclick="check()">Unlock</button>
-    </div>
+    <p style="color:#666">Passwort: Peter</p>
+    <div class="pw"><input type="password" id="pw" placeholder="Passwort..."><button onclick="check()">Unlock</button></div>
     <div id="msg" style="margin-top:15px"></div>
+    <div class="admin-form" id="adminForm">
+      <h3 style="margin-bottom:15px">Neuen Log schreiben:</h3>
+      <input type="text" id="logTitle" placeholder="Titel">
+      <textarea id="logDesc" placeholder="Details..."></textarea>
+      <button onclick="addLog()">Hinzufügen</button>
+    </div>
   </div>
 </div>
 
 <script>
+// Laufband duplizieren für endlose Schleife
+const track=document.getElementById('track');
+track.innerHTML += track.innerHTML;
+
 function check(){
   const v=document.getElementById('pw').value.toLowerCase();
   const m=document.getElementById('msg');
-  if(v==='peter'){m.style.color='#00ff88';m.innerHTML='✅ Zugriff gewährt - Admin Modus aktiv';}
+  if(v==='peter'){m.style.color='#00ff88';m.innerHTML='✅ Zugriff gewährt';document.getElementById('adminForm').style.display='block';}
   else{m.style.color='#ff1a1a';m.innerHTML='❌ Falsches Passwort';}
+}
+function addLog(){
+  const t=document.getElementById('logTitle').value;
+  if(!t) return;
+  const list=document.getElementById('logsList');
+  const div=document.createElement('div');
+  div.className='log';
+  div.innerHTML=`<span>${t}</span><span style="color:#555">${new Date().toLocaleTimeString()}</span>`;
+  list.prepend(div);
+  document.getElementById('logTitle').value='';
 }
 </script>
 </body>
